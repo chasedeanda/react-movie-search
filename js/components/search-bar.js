@@ -1,10 +1,6 @@
 import React from 'react';
 import autoBind from 'react-autobind';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
-import { searchMovies } from '../actions'
-import MovieList from './movie-list.js';
+import { browserHistory } from 'react-router';
 
 class SearchBar extends React.Component {
   constructor(){
@@ -13,27 +9,16 @@ class SearchBar extends React.Component {
   }
   handleSubmit(e){
     e.preventDefault();
-    this.props.searchMovies(this.refs.search.value)
+    browserHistory.push(`/search/${this.refs.search.value}`)
   }
   render(){
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" name="search" ref="search"/>
-          <button type="submit">Search</button>
-        </form>
-        <MovieList movies={this.props.movies}/>
-      </div>
+      <form className="navbar-form navbar-left" onSubmit={this.handleSubmit}>
+        <input className="form-control" placeholder="Search" type="text" name="search" ref="search"/>
+        <button className="btn btn-warning left10" type="submit">Search</button>
+      </form>
     )
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({searchMovies: searchMovies}, dispatch)
-}
-function mapStateToProps(state){
-  return {
-    movies: state.movies.movies
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(SearchBar);
+export default SearchBar;

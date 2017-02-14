@@ -13,6 +13,10 @@ const moviesReducer = (state=initialState,action) => {
       state = {...state, fetching:true}
       break;
     }
+    case "GET_MOVIE_COMPLETED":{
+      state = {...state, movies:action.payload,fetching:false,fetched:true}
+      break;
+    }
   }
   return state;
 }

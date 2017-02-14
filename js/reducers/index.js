@@ -7,4 +7,11 @@ const reducers = combineReducers({
   mostPopular: mostPopularReducer
 });
 
-export default reducers;
+const rootReducer = (state,action)=>{
+  if(action.type === "GET_MOVIE_STARTED"){
+    state = undefined
+  }
+  return reducers(state,action)
+}
+
+export default rootReducer;

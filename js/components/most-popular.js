@@ -4,6 +4,7 @@ import autoBind from 'react-autobind';
 import {bindActionCreators} from 'redux';
 
 import { getMostPopular } from '../actions';
+import Movie from './movie';
 
 class MostPopular extends React.Component{
   constructor(){
@@ -14,17 +15,17 @@ class MostPopular extends React.Component{
     this.props.getMostPopular();
   }
   render(){
-    console.log(this.props)
     let mostPopular = this.props.movies.map((movie,key)=>{
-      return <li key={key}>{movie.original_title}</li>
+      return <Movie movie={movie} key={key}/>;
     });
     if(this.props.fetching){
       return <div>Loading...</div>
     }
     return(
-      <ul>
+      <div className="row">
+        <h1><span className="glyphicon glyphicon-fire"></span> Hot Movies</h1>
         {mostPopular}
-      </ul>
+      </div>
     )
   }
 }

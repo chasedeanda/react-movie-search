@@ -25,3 +25,12 @@ export const getMostPopular = ()=>{
       .then(movies => dispatch({type:"MOST_POPULAR_COMPLETE",payload:movies}))
   }
 }
+
+export const getMovie = (id) =>{
+  return dispatch => {
+    dispatch({type:"GET_MOVIE_STARTED"})
+    return axios.get(`${API_BASE}/movie/${id}?api_key=${API_KEY}&language=en-US`)
+    .then(response => response.data)
+    .then(movie => dispatch({type:"GET_MOVIE_COMPLETED",payload:[movie]}))
+  }
+}
